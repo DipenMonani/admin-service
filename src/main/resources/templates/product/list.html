@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout :: layout(~{::content})}" xmlns:th="https://www.thymeleaf.org">
+<body>
+<div th:fragment="content" id="content" data-menu="/products/add/product">
+
+    <sl-breadcrumb>
+        <sl-breadcrumb-item>
+            <sl-icon slot="prefix" name="chat"></sl-icon>
+            Product</sl-breadcrumb-item>
+        <sl-breadcrumb-item>List</sl-breadcrumb-item>
+    </sl-breadcrumb>
+    <div id="report-results">
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Handle</th>
+                    <th>Published Date</th>
+                    <th>Vendor</th>
+                    <th>Product Type</th>
+                    <th>Created Date</th>
+                </tr>
+                </thead>
+                <tbody th:if="${pageResponse.content != null and not #lists.isEmpty(pageResponse.content)}">
+                <tr th:each="item : ${pageResponse.content}">
+                    <td th:text="${item.title != null ? item.title : '-'}">-</td>
+                    <td th:text="${item.handle != null ? item.handle : '-'}">-</td>
+                    <td th:text="${item.publishedAt != null ? item.publishedAt : '-'}">-</td>
+                    <td th:text="${item.vendor != null ? item.vendor : '-'}">-</td>
+                    <td th:text="${item.productType != null ? item.productType : '-'}">-</td>
+                    <td th:text="${item.createdAt != null ? item.createdAt : '-'}">-</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pageButtons">
+            <span class="previous" th:if="${pageResponse.number != null and pageResponse.number > 0}">
+                <a th:href="@{/view/product/list(page=${pageResponse.number - 1}, size=${pageResponse.size})}">
+                    <sl-button variant="primary">Previous</sl-button>
+                </a>
+            </span>
+            <span class="previous" th:unless="${pageResponse.number != null and pageResponse.number > 0}">
+                <sl-button disabled variant="primary">Previous</sl-button>
+            </span>
+
+
+            <span class="pageNum">Page: <span th:text="${pageResponse.number + 1}">1</span> of <span
+                    th:text="${pageResponse.totalPages}">1</span></span>
+            <span class="next"
+                  th:if="${pageResponse.number != null and pageResponse.number < pageResponse.totalPages - 1}">
+                <a th:href="@{/view/product/list(page=${pageResponse.number + 1}, size=${pageResponse.size})}">
+                    <sl-button variant="primary">Next</sl-button>
+                </a>
+            </span>
+
+            <span class="next"
+                  th:unless="${pageResponse.number != null and pageResponse.number < pageResponse.totalPages - 1}">
+                <sl-button disabled variant="primary">Next</sl-button>
+            </span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

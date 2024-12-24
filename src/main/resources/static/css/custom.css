@@ -1,0 +1,237 @@
+:root,
+:host,
+.sl-theme-light {
+    --card-background-color: #ffffff;
+    --ap-color-primary: #fad306;
+
+    /* Shoelace theme for Letshego */
+    --sl-color-primary-50: rgb(254 250 226);
+    --sl-color-primary-100: rgb(253 237 155);
+    --sl-color-primary-200: rgb(251 222 66);
+    --sl-color-primary-300: rgb(242 204 6);
+    --sl-color-primary-400: rgb(218 184 5);
+    --sl-color-primary-500: rgb(187 158 4);
+    --sl-color-primary-600: rgb(155 130 4);
+    --sl-color-primary-700: rgb(127 107 3);
+    --sl-color-primary-800: rgb(105 88 3);
+    --sl-color-primary-900: rgb(74 63 2);
+    --sl-color-primary-950: rgb(46 39 1);
+}
+
+.role-card-container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+    padding: 12px;
+}
+
+.role-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: var(--card-background-color);
+    border: lightgray solid 1px;
+    padding: 8px;
+}
+
+.search-form {
+    display: flex;
+    gap: 8px;
+}
+
+.report-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* max-width: 400px; */
+}
+
+#sidebar nav h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--sl-font-size-large);
+    font-weight: var(--sl-font-weight-normal);
+    border-bottom: solid var(--docs-border-width) var(--docs-border-color);
+    margin: 1.5rem 0 0.5rem 0;
+    padding-bottom: 4px;
+}
+
+#sidebar nav h2 sl-icon {
+    font-size: 28px;
+    color: var(--ap-color-primary);
+}
+
+table {
+    width: 100%;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+table.vertical > tbody > tr > td:first-child {
+    font-weight: bold;
+    white-space: nowrap;
+    width: 1%;
+}
+
+form.logout {
+    position: fixed;
+    bottom: 8px;
+    left: 8px;
+}
+
+.label-on-left {
+    --label-width: 10rem;
+    --gap-width: 1rem;
+}
+
+.label-on-left + .label-on-left {
+    margin-top: var(--sl-spacing-medium);
+}
+
+.label-on-left::part(form-control) {
+    display: grid;
+    grid: auto / var(--label-width) 1fr;
+    gap: var(--sl-spacing-3x-small) var(--gap-width);
+    align-items: center;
+}
+
+.label-on-left::part(form-control-label) {
+    text-align: right;
+}
+
+.label-on-left::part(form-control-help-text) {
+    grid-column-start: 2;
+}
+
+sl-switch.label-on-left::part(base) {
+    display: grid;
+    grid: auto / var(--label-width) 1fr;
+    gap: var(--sl-spacing-3x-small) var(--gap-width);
+    align-items: center;
+}
+
+sl-switch.label-on-left::part(label) {
+    order: 1;
+    text-align: right;
+}
+
+sl-switch.label-on-left::part(control) {
+    order: 2;
+}
+
+
+form #report-params {
+    padding: 1rem;
+    max-width: 400px;
+}
+
+sl-textarea::part(textarea) {
+    font-family: var(--sl-font-mono);
+}
+
+.list-header {
+    display: flex;
+}
+
+.list-header h2 {
+    flex-grow: 1;
+}
+
+.list-header sl-button {
+    align-content: center;
+}
+
+.brand {
+    color: #fad306;
+    font-size: var(--sl-font-size-x-large);
+    font-weight: bold;
+    text-decoration: none
+}
+
+.report-form .custom-field {
+    display: grid;
+    grid: auto / var(--label-width) 1fr;
+    gap: var(--sl-spacing-3x-small) var(--gap-width);
+    align-items: center;
+}
+
+.custom-field .custom-field-label {
+    text-align: right;
+}
+
+sl-breadcrumb::part(base) {
+    background-color: var(--sl-color-gray-50);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+sl-breadcrumb-item::part(base) {
+    font-size: var(--sl-font-size-medium)
+}
+
+.customer-card {
+    cursor: pointer;
+    padding: 1rem;
+    transition: background 0.5s ease;
+}
+
+.customer-card:hover {
+    background: var(--sl-color-primary-50);
+    transition: background 0.5s ease;
+}
+
+.role-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+a.selected::before {
+    content: url("/img/circle.svg");
+    color: red;
+    margin-left: -28px;
+}
+
+.search-btn{
+ margin-left:160px !important;
+}
+.btn-details {
+    margin-right:30px !important;
+}
+.btn-active {
+    background-color:"#DCDCDC";
+}
+
+.hidden {
+  display: none;
+}
+
+.account-summary-detailed{
+    width: 80vw;
+    height: 70vh;
+    overflow: auto;
+    margin: 10px auto;
+
+}
+.account-summary-detailed th{
+    background:white;
+    position: sticky;
+    top:0;
+}
+.pageButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+.table-wrapper {
+    overflow-x: auto;
+}
+.form-on-right {
+    float: right;
+}

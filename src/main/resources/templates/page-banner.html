@@ -1,0 +1,29 @@
+<div id="message" th:fragment="message" hx-swap-oob="true" xmlns:th="https://www.thymeleaf.org">
+    <div th:if="${banner_warning != null}">
+        <sl-alert open closable>
+            <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
+            <th:block th:text="${banner_warning}">warning</th:block>
+        </sl-alert>
+    </div>
+    <div th:if="${banner_success != null}">
+        <sl-alert variant="success" open closable>
+            <sl-icon slot="icon" name="check2-circle"></sl-icon>
+            <th:block th:text="${banner_success}">success</th:block>
+        </sl-alert>
+    </div>
+    <div th:if="${banner_error != null}">
+        <sl-alert variant="danger" open closable>
+            <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+            <th:block th:each="error: ${banner_error}">
+                <th:block th:text="${error}"></th:block>
+                <br/>
+            </th:block>
+        </sl-alert>
+    </div>
+    <div th:if="${banner_info != null}">
+        <sl-alert variant="primary" open closable>
+            <sl-icon slot="icon" name="info-circle"></sl-icon>
+            <th:block th:text="${banner_info}">info</th:block>
+        </sl-alert>
+    </div>
+</div>

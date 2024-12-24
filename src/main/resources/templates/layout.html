@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="layout (content)"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8">
+    <title>Letshego AdminPlus</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" th:href="@{/webjars/shoelace-style__shoelace/cdn/themes/light.css}"/>
+    <link href="/css/custom.css" rel="stylesheet">
+    <link href="/css/shoelace.css" rel="stylesheet">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.70/dist/shoelace.js"></script>
+    <script th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+    <script src="/js/sidebar.js"></script>
+</head>
+
+<body hx-indicator="#indicator" hx-target="#content">
+
+<button id="menu-toggle" type="button">
+    <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+            <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+    </svg>
+</button>
+
+<aside id="sidebar">
+    <header style="display: flex; align-items: center; gap: 8px">
+        <svg width="48" height="36" viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+                    d="M 18.439 0.203 L 19.554 6.975 L 0.475 22.111 L 18.439 0.203 Z M 30.787 22.359 L 10.366 16.101 L 0.97 22.359 L 30.787 22.359 Z M 31.674 22.193 L 18.976 0.223 L 23.684 18.662 L 31.674 22.193 Z"
+                    style="fill: rgb(250, 211, 6);"></path>
+        </svg>
+
+        <a href="/" class="brand">Admin</a>
+    </header>
+
+    <nav hx-swap="outerHTML" hx-push-url="true">
+        <ul>
+            <li>
+                <h2>
+                    <sl-icon name="box"></sl-icon>
+                    Products
+                </h2>
+                <ul>
+                    <li>
+                        <a href="#" hx-get="/view/product/list">Product</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</aside>
+
+<main>
+    <div id="banner" th:replace="~{page-banner :: message}"></div>
+    <sl-spinner id="indicator" class="htmx-indicator"></sl-spinner>
+    <div id="content" th:replace="${content}"></div>
+</main>
+
+<script>
+    // Menu styling
+    htmx.on('htmx:afterSwap', event => {
+        if(event.target.attributes['data-menu'] == undefined) return;
+
+        const menu = event.target.attributes['data-menu'].value;
+        document.querySelectorAll('nav li a').forEach(e => e.classList.remove("selected"));
+        document.querySelector('nav li a[hx-get="' + menu + '"]').classList.add("selected");
+    });
+
+    // Enable swapping error message on server error
+    htmx.on('htmx:beforeSwap', event => {
+        if(event.detail.xhr.status == 500) {
+            event.detail.shouldSwap = true;
+            event.detail.target = htmx.find("#message");
+        }
+    });
+
+</script>
+</body>
+</html>
